@@ -8,35 +8,25 @@
  * @author Adm
  */
 
-import java.sql.PreparedStatement;
-import java.sql.Connection;
-import javax.swing.JOptionPane;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class ProdutosDAO {
-    
-    Connection conn;
-    PreparedStatement prep;
-    ResultSet resultset;
-    ArrayList<ProdutosDTO> listagem = new ArrayList<>();
-    
+
     public void cadastrarProduto (ProdutosDTO produto){
         
-        
-        //conn = new conectaDAO().connectDB();
-        
-        
+        try {
+            conectaDAO conector = new conectaDAO();
+            conector.conectar();
+            Statement stmt = conectaDAO.conn.createStatement();
+            
+            String sql = "INSERT INTO produtos(nome, valor, status) VALUES('" + produto.getNome() + "','" + produto.getValor() + "','" + produto.getStatus() + "')";
+            stmt.executeUpdate(sql);
+            
+        } catch (SQLException sqle) {
+           System.out.println( "Erro inserindo : " + sqle.getMessage() );
+        }   
     }
-    
-    public ArrayList<ProdutosDTO> listarProdutos(){
-        
-        return listagem;
-    }
-    
-    
-    
         
 }
 
