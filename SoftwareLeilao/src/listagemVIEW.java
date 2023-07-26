@@ -1,5 +1,8 @@
-
-import java.util.ArrayList;
+import java.lang.System.Logger;
+import java.sql.Statement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.lang.System.Logger.Level;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -45,10 +48,7 @@ public class listagemVIEW extends javax.swing.JFrame {
 
         listaProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "ID", "Nome", "Valor", "Status"
@@ -202,24 +202,26 @@ public class listagemVIEW extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void listarProdutos(){
-        try {
-            ProdutosDAO produtosdao = new ProdutosDAO();
-            
-            DefaultTableModel model = (DefaultTableModel) listaProdutos.getModel();
-            model.setNumRows(0);
-            
-            ArrayList<ProdutosDTO> listagem = produtosdao.listarProdutos();
-            
-            for(int i = 0; i < listagem.size(); i++){
-                model.addRow(new Object[]{
-                    listagem.get(i).getId(),
-                    listagem.get(i).getNome(),
-                    listagem.get(i).getValor(),
-                    listagem.get(i).getStatus()
-                });
-            }
-        } catch (Exception e) {
-        }
-    
+        try{
+        conectaDAO conector = new conectaDAO();
+        conector.conectar();
+
+        DefaultTableModel model = (DefaultTableModel) listaProdutos.getModel();
+
+        String sql = "SELECT*FROM produtos";
+
+        Statement stmt = conectaDAO.conn.createStatement();
+        ResultSet rs = stmt.executeQuery(sql);
+        
+            while(rs.next()){
+                    String id = rs.getString("id");
+                    String nome = rs.getString("nome");
+                    String valor = rs.getString("valor");
+                    String status = rs.getString("status");
+                    model.addRow(new Object[]{id, nome, valor, status});
+            }   
+        } catch (SQLException ex) {
+            System.out.println( "Erro inserindo : " + ex.getMessage());
+        }   
     }
 }
