@@ -17,17 +17,33 @@ import javax.swing.JOptionPane;
  */
 public class conectaDAO {
     
-    public Connection connectDB(){
-        Connection conn = null;
+    
+    public static Connection conn;
+
+    public String url = "jdbc:mysql://localhost:3306/uc11";
+    public String user = "root";
+    public String password = "mysql";
+    
+    
+    public boolean conectar(){
         
         try {
-        
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/uc11?user=root&password=");
-            
-        } catch (SQLException erro){
-            JOptionPane.showMessageDialog(null, "Erro ConectaDAO" + erro.getMessage());
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = DriverManager.getConnection(url, user, password);
+            System.out.println("Conexão realizada com sucesso");    
+            return true;
+        } catch (ClassNotFoundException | SQLException ex) {
+            System.out.println("Falha na conexão com o banco "+ ex.getMessage());
+            return false;
         }
-        return conn;
+    }
+    
+     public void desconectar(){
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+          
+        }
     }
     
 }
