@@ -10,6 +10,7 @@
 
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 public class ProdutosDAO {
 
@@ -22,9 +23,10 @@ public class ProdutosDAO {
             
             String sql = "INSERT INTO produtos(nome, valor, status) VALUES('" + produto.getNome() + "','" + produto.getValor() + "','" + produto.getStatus() + "')";
             stmt.executeUpdate(sql);
+            JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
             
         } catch (SQLException sqle) {
-           System.out.println( "Erro inserindo : " + sqle.getMessage() );
+           JOptionPane.showMessageDialog(null, "Erro ao cadastrar produto.");
         }   
     }
         
