@@ -50,12 +50,12 @@ public class ProdutosDAO {
     public static void listarProdutosVendidos(){
        
         try{
-        ((DefaultTableModel) (listagemVIEW.listaProdutos).getModel()).setRowCount(0);
+        ((DefaultTableModel) (vendasVIEW.tblVendas).getModel()).setRowCount(0);
         
         conectaDAO conector = new conectaDAO();
         conector.conectar();
 
-        DefaultTableModel model = (DefaultTableModel) (listagemVIEW.listaProdutos).getModel();
+        DefaultTableModel model = (DefaultTableModel) (vendasVIEW.tblVendas).getModel();
 
         String sql = "SELECT*FROM produtos WHERE status = 'Vendido'";
 
