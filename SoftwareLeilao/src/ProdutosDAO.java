@@ -29,6 +29,20 @@ public class ProdutosDAO {
            JOptionPane.showMessageDialog(null, "Erro ao cadastrar produto.");
         }   
     }
-        
+    
+    public static void venderProduto(int idd){
+        try {
+            conectaDAO conector = new conectaDAO();
+            conector.conectar();
+            Statement stmt = conectaDAO.conn.createStatement();
+            
+            String sql = "UPDATE produtos SET status = 'Vendido' WHERE id = " + idd;
+            stmt.executeUpdate(sql);
+            JOptionPane.showMessageDialog(null, "Produto vendido com sucesso!");
+            
+        } catch (SQLException sqle) {
+           JOptionPane.showMessageDialog(null, "Erro ao vender produto.");
+        } 
+    }
 }
 
