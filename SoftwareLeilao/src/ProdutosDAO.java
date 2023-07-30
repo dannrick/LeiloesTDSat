@@ -65,6 +65,7 @@ public class ProdutosDAO {
             while(rs.next()){
                     String id = rs.getString("id");
                     String nome = rs.getString("nome");
+                    
                     String valor = rs.getString("valor");
                     String status = rs.getString("status");
                     model.addRow(new Object[]{id, nome, valor, status});
