@@ -144,13 +144,11 @@ public class listagemVIEW extends javax.swing.JFrame {
         ProdutosDAO.venderProduto(Integer.parseInt(id));
         listarProdutos();
         
-        /*Professor, acabei confundindo e já corrigindo a funcionalidade deste botão no 1º
-        commit (Corrigindo função do botão 'Vender'), na hora de criar a função 'venderProduto()'
-        */
     }//GEN-LAST:event_btnVenderActionPerformed
 
     private void btnVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasActionPerformed
-        
+        vendasVIEW telaVendas = new vendasVIEW();
+        telaVendas.setVisible(true);
     }//GEN-LAST:event_btnVendasActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
